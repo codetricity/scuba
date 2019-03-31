@@ -6,11 +6,16 @@ For recreational and scientific diving.
 
 ![underwater shot](images/underwater.png)
 
+Photo Credit: Kai Oda with RICOH THETA V and TW-1 Housing
+
 ## Features
 * takes 1,000 pictures at 4 second intervals
 * this will give you 66 minutes of recording
 
 ![underwater 2](images/underwater-2.png)
+
+Photo Credit: Kai Oda with RICOH THETA V and TW-1 Housing
+
 
 ## workflow
 
@@ -34,6 +39,10 @@ You can use this plug-in like a self-timer and discard the pictures
 that you don't want to use.
 
 ![case](images/case.png)
+
+![underwater 3](images/underwater-3.png)
+
+Photo Credit: Kai Oda using RICOH THETA V and TW-1 Housing
 
 
 
