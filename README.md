@@ -30,8 +30,10 @@ zoom in.
 
 Cannot use Wi-Fi button when the THETA is in the underwater case.
 This prevents the camera from being put into self-timer mode.
+You can use this plug-in like a self-timer and discard the pictures
+that you don't want to use.
 
-
+![case](images/case.png)
 
 
 
