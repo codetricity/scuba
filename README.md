@@ -26,6 +26,12 @@ to enable plug-in mode
 * if area warrants further inspection, use full resolution image to
 zoom in.
 
+## Additional Benefits
+
+Cannot use Wi-Fi button when the THETA is in the underwater case.
+This prevents the camera from being put into self-timer mode.
+
+
 
 
 
