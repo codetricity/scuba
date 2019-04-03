@@ -17,6 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import static org.theta4j.webapi.Options.COLOR_TEMPERATURE;
 import static org.theta4j.webapi.Options.OFF_DELAY;
 import static org.theta4j.webapi.Options.SLEEP_DELAY;
 
@@ -54,6 +55,7 @@ public class MainActivity extends PluginActivity {
         private Theta theta = Theta.createForPlugin();
         private ExecutorService executor = Executors.newSingleThreadExecutor();
         private ExecutorService progressExecutor = Executors.newSingleThreadExecutor();
+        private ExecutorService colorExecutor = Executors.newSingleThreadExecutor();
 
 
         private int delay = 4000;
@@ -65,13 +67,27 @@ public class MainActivity extends PluginActivity {
         private int initialSleepDelay;
         private int initialOffDelay;
 
+        private int colorTemperature = 6500;
+        private LedColor ledColor;
+
         private boolean inProgess = false;
 
         @Override
         public void onKeyDown(int keyCode, KeyEvent keyEvent) {
             if (keyCode == KeyReceiver.KEYCODE_CAMERA) {
 
-                notificationLed3Show(LedColor.YELLOW);
+                switch (colorTemperature) {
+                    case 6500 :
+                        ledColor = LedColor.YELLOW;
+                        break;
+                    case 2500:
+                        ledColor = LedColor.RED;
+                        break;
+                    case 10000:
+                        ledColor = LedColor.CYAN;
+                        break;
+                }
+
                 notificationAudioSelf();
 
                 executor.submit(() -> {
@@ -92,16 +108,19 @@ public class MainActivity extends PluginActivity {
 
                         while (currentPicture < maxPicture) {
                             Log.d(TAG, "current picture " + Integer.toString(currentPicture));
-                            notificationLedBlink(LedTarget.LED3, LedColor.YELLOW, 1000);
+                            Log.d(TAG, "Color Temperature " + theta.getOption(COLOR_TEMPERATURE).toString());
+
+                            notificationLedBlink(LedTarget.LED3, ledColor, 1000);
                             notificationAudioSelf();
                             Thread.sleep(delay/2);
-                            notificationLedBlink(LedTarget.LED3, LedColor.YELLOW, 500);
+                            notificationLedBlink(LedTarget.LED3, ledColor, 500);
                             notificationAudioSelf();
                             Thread.sleep(delay/4);
-                            notificationLedBlink(LedTarget.LED3, LedColor.YELLOW, 250);
+                            notificationLedBlink(LedTarget.LED3, ledColor, 250);
                             notificationAudioSelf();
                             Thread.sleep(delay/4);
                             theta.takePicture();
+                            notificationLedHide(LedTarget.LED3);
 
 
                             currentPicture = currentPicture + 1;
@@ -117,7 +136,51 @@ public class MainActivity extends PluginActivity {
                         e.printStackTrace();
                     }
                 });
+            }
 
+            if (keyCode == KeyReceiver.KEYCODE_MEDIA_RECORD) {
+
+                colorExecutor.submit(() -> {
+                    switch (colorTemperature) {
+                        case 2500 :
+                            colorTemperature = 6500;
+                            notificationLed3Show(LedColor.YELLOW);
+                            try {
+                                theta.setOption(COLOR_TEMPERATURE, 6500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            break;
+                        case 6500 :
+                            colorTemperature = 10000;
+                            notificationLed3Show(LedColor.CYAN);
+                            try {
+                                theta.setOption(COLOR_TEMPERATURE, 10000);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        case 10000:
+                            colorTemperature = 2500;
+                            notificationLed3Show(LedColor.RED);
+                            try {
+                                theta.setOption(COLOR_TEMPERATURE, 2500);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                    }
+                });
+
+            }
+
+
+        }
+
+        @Override
+        public void onKeyUp(int keyCode, KeyEvent keyEvent) {
+            if (keyCode == KeyReceiver.KEYCODE_CAMERA) {
                 progressExecutor.submit(() -> {
                     if (inProgess) {
                         currentPicture = maxPicture;
@@ -128,17 +191,8 @@ public class MainActivity extends PluginActivity {
                         inProgess = true;
                         currentPicture = 0;
                     }
-
                 });
             }
-
-
-
-        }
-
-        @Override
-        public void onKeyUp(int keyCode, KeyEvent keyEvent) {
-
         }
 
         @Override
