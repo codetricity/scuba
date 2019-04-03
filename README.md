@@ -1,6 +1,6 @@
 # RICOH THETA SCUBA Plug-in
 
-![scuba gear](images/scuba-gear.png)
+![scuba gear](release/1.png)
 
 For recreational and scientific diving.
 
@@ -17,7 +17,7 @@ Photo Credit: Kai Oda with RICOH THETA V and TW-1 Housing
 Photo Credit: Kai Oda with RICOH THETA V and TW-1 Housing
 
 
-## workflow
+## Workflow
 
 * Set plug-in to load by default
 * put into RICOH TW-1 Underwater Housing for THETA V
@@ -38,11 +38,29 @@ This prevents the camera from being put into self-timer mode.
 You can use this plug-in like a self-timer and discard the pictures
 that you don't want to use.
 
-![case](images/case.png)
+
 
 ![underwater 3](images/underwater-3.png)
 
 Photo Credit: Kai Oda using RICOH THETA V and TW-1 Housing
+
+## Usage
+
+* Press the shutter button to start taking pictures every
+4 seconds.
+* Press the shutter button again to stop taking pictures.
+* Long-press lower button on side to put start scuba plug-n
+* Long-press lower button again to stop scuba plug-in
+
+![case](release/3.png)
+
+### Adjusting Color Temperature Underwater
+
+Short-press lower button on side to cycle between different
+color temperatures.
+
+![color temperature](release/4.png)
+
 
 
 
