@@ -19,11 +19,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static org.theta4j.webapi.Options.COLOR_TEMPERATURE;
 import static org.theta4j.webapi.Options.OFF_DELAY;
 import static org.theta4j.webapi.Options.SLEEP_DELAY;
 import static org.theta4j.webapi.Options.WHITE_BALANCE;
-import static org.theta4j.webapi.WhiteBalance.COLOR_TEMPERATURE;
 
 public class MainActivity extends PluginActivity {
 
@@ -163,7 +161,7 @@ public class MainActivity extends PluginActivity {
                             break;
                         case 6500 :
                             colorTemperature = 10000;
-                            notificationLed3Show(LedColor.CYAN);
+                            notificationLed3Show(LedColor.RED);
                             try {
                                 theta.setOption(Options.COLOR_TEMPERATURE, 10000);
                             } catch (IOException e) {
@@ -172,7 +170,7 @@ public class MainActivity extends PluginActivity {
                             break;
                         case 10000:
                             colorTemperature = 2500;
-                            notificationLed3Show(LedColor.RED);
+                            notificationLed3Show(LedColor.CYAN);
                             try {
                                 theta.setOption(Options.COLOR_TEMPERATURE, 2500);
                             } catch (IOException e) {
