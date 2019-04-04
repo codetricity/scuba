@@ -85,10 +85,10 @@ public class MainActivity extends PluginActivity {
                         ledColor = LedColor.YELLOW;
                         break;
                     case 2500:
-                        ledColor = LedColor.RED;
+                        ledColor = LedColor.CYAN;
                         break;
                     case 10000:
-                        ledColor = LedColor.CYAN;
+                        ledColor = LedColor.RED;
                         break;
                 }
 
