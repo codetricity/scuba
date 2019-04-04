@@ -59,6 +59,8 @@ Photo Credit: Kai Oda using RICOH THETA V and TW-1 Housing
 Short-press lower button on side to cycle between different
 color temperatures.
 
+![color examples](release/5.png)
+
 ![color temperature](release/4.png)
 
 

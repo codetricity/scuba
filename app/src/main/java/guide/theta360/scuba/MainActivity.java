@@ -10,7 +10,9 @@ import com.theta360.pluginlibrary.receiver.KeyReceiver;
 import com.theta360.pluginlibrary.values.LedColor;
 import com.theta360.pluginlibrary.values.LedTarget;
 
+import org.theta4j.webapi.Options;
 import org.theta4j.webapi.Theta;
+import org.theta4j.webapi.WhiteBalance;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -20,6 +22,8 @@ import java.util.concurrent.TimeUnit;
 import static org.theta4j.webapi.Options.COLOR_TEMPERATURE;
 import static org.theta4j.webapi.Options.OFF_DELAY;
 import static org.theta4j.webapi.Options.SLEEP_DELAY;
+import static org.theta4j.webapi.Options.WHITE_BALANCE;
+import static org.theta4j.webapi.WhiteBalance.COLOR_TEMPERATURE;
 
 public class MainActivity extends PluginActivity {
 
@@ -108,7 +112,7 @@ public class MainActivity extends PluginActivity {
 
                         while (currentPicture < maxPicture) {
                             Log.d(TAG, "current picture " + Integer.toString(currentPicture));
-                            Log.d(TAG, "Color Temperature " + theta.getOption(COLOR_TEMPERATURE).toString());
+                            Log.d(TAG, "Color Temperature " + theta.getOption(Options.COLOR_TEMPERATURE).toString());
 
                             notificationLedBlink(LedTarget.LED3, ledColor, 1000);
                             notificationAudioSelf();
@@ -141,12 +145,17 @@ public class MainActivity extends PluginActivity {
             if (keyCode == KeyReceiver.KEYCODE_MEDIA_RECORD) {
 
                 colorExecutor.submit(() -> {
+                    try {
+                        theta.setOption(WHITE_BALANCE, WhiteBalance.COLOR_TEMPERATURE);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     switch (colorTemperature) {
                         case 2500 :
                             colorTemperature = 6500;
                             notificationLed3Show(LedColor.YELLOW);
                             try {
-                                theta.setOption(COLOR_TEMPERATURE, 6500);
+                                theta.setOption(Options.COLOR_TEMPERATURE, 6500);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -156,7 +165,7 @@ public class MainActivity extends PluginActivity {
                             colorTemperature = 10000;
                             notificationLed3Show(LedColor.CYAN);
                             try {
-                                theta.setOption(COLOR_TEMPERATURE, 10000);
+                                theta.setOption(Options.COLOR_TEMPERATURE, 10000);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -165,7 +174,7 @@ public class MainActivity extends PluginActivity {
                             colorTemperature = 2500;
                             notificationLed3Show(LedColor.RED);
                             try {
-                                theta.setOption(COLOR_TEMPERATURE, 2500);
+                                theta.setOption(Options.COLOR_TEMPERATURE, 2500);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
