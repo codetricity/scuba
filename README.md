@@ -63,6 +63,8 @@ color temperatures.
 
 ![color temperature](release/4.png)
 
+![color samples](images/white_balance_samples.png)
+
 
 
 

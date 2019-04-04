@@ -94,6 +94,11 @@ public class MainActivity extends PluginActivity {
 
                 executor.submit(() -> {
                     try {
+                        try {
+                            theta.setOption(WHITE_BALANCE, WhiteBalance.COLOR_TEMPERATURE);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         initialOffDelay = theta.getOption(OFF_DELAY);
                         initialSleepDelay = theta.getOption(SLEEP_DELAY);
                         Log.d(TAG, "Initial Sleep Delay: " + Integer.toString(initialSleepDelay));
