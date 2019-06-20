@@ -80,10 +80,10 @@ public class MainActivity extends PluginActivity {
 
                 switch (colorTemperature) {
                     case 6500 :
-                        ledColor = LedColor.YELLOW;
-                        break;
-                    case 2500:
                         ledColor = LedColor.CYAN;
+                        break;
+                    case 8500:
+                        ledColor = LedColor.YELLOW;
                         break;
                     case 10000:
                         ledColor = LedColor.RED;
@@ -154,17 +154,17 @@ public class MainActivity extends PluginActivity {
                         e.printStackTrace();
                     }
                     switch (colorTemperature) {
-                        case 2500 :
-                            colorTemperature = 6500;
+                        case 6500 :
+                            colorTemperature = 8500;
                             notificationLed3Show(LedColor.YELLOW);
                             try {
-                                theta.setOption(Options.COLOR_TEMPERATURE, 6500);
+                                theta.setOption(Options.COLOR_TEMPERATURE, 8500);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
 
                             break;
-                        case 6500 :
+                        case 8500 :
                             colorTemperature = 10000;
                             notificationLed3Show(LedColor.RED);
                             try {
@@ -174,10 +174,10 @@ public class MainActivity extends PluginActivity {
                             }
                             break;
                         case 10000:
-                            colorTemperature = 2500;
+                            colorTemperature = 6500;
                             notificationLed3Show(LedColor.CYAN);
                             try {
-                                theta.setOption(Options.COLOR_TEMPERATURE, 2500);
+                                theta.setOption(Options.COLOR_TEMPERATURE, 6500);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
