@@ -10,6 +10,7 @@ import com.theta360.pluginlibrary.receiver.KeyReceiver;
 import com.theta360.pluginlibrary.values.LedColor;
 import com.theta360.pluginlibrary.values.LedTarget;
 
+import org.theta4j.webapi.CaptureMode;
 import org.theta4j.webapi.Options;
 import org.theta4j.webapi.Theta;
 import org.theta4j.webapi.WhiteBalance;
@@ -19,6 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import static org.theta4j.webapi.Options.CAPTURE_MODE;
 import static org.theta4j.webapi.Options.OFF_DELAY;
 import static org.theta4j.webapi.Options.SLEEP_DELAY;
 import static org.theta4j.webapi.Options.WHITE_BALANCE;
@@ -59,7 +61,6 @@ public class MainActivity extends PluginActivity {
         private ExecutorService progressExecutor = Executors.newSingleThreadExecutor();
         private ExecutorService colorExecutor = Executors.newSingleThreadExecutor();
 
-
         private int delay = 4000;
         private int currentPicture = 0;
         //4,000 seconds or 66 minutes
@@ -73,6 +74,10 @@ public class MainActivity extends PluginActivity {
         private LedColor ledColor;
 
         private boolean inProgess = false;
+
+
+
+
 
         @Override
         public void onKeyDown(int keyCode, KeyEvent keyEvent) {
@@ -111,7 +116,7 @@ public class MainActivity extends PluginActivity {
                         Log.d(TAG, "Sleep Delay: " + theta.getOption(SLEEP_DELAY).toString());
                         Log.d(TAG, "Off Delay " + theta.getOption(OFF_DELAY).toString());
 
-
+                        theta.setOption(CAPTURE_MODE, CaptureMode.IMAGE);
 
                         while (currentPicture < maxPicture) {
                             Log.d(TAG, "current picture " + Integer.toString(currentPicture));
