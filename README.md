@@ -1,4 +1,6 @@
-# RICOH THETA SCUBA Plug-in
+# RICOH THETA V SCUBA Plug-in
+
+Does not work with Z1
 
 ![scuba gear](release/1.png)
 
